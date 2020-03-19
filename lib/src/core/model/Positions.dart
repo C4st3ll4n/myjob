@@ -6,7 +6,7 @@ class Positions with ChangeNotifier {
   final _provider = JobsProvider();
 
   final savedListKey = GlobalKey<AnimatedListState>();
-  bool _isLoading = false;
+  bool isLoading = false;
   List<dynamic> _positions;
   List<dynamic> _saved;
 
@@ -22,7 +22,7 @@ class Positions with ChangeNotifier {
   Map<String, List<GlobalKey>> get key => Map.unmodifiable(_keys);
 
   Future<void> getPositions({UserLocation location}) async {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
 
     if (location != null) {
@@ -34,7 +34,7 @@ class Positions with ChangeNotifier {
     _saved = await _provider.savedPositions();
     _keys['saved'] = List.generate(_saved.length, (_) => GlobalKey());
 
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 }
